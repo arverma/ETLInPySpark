@@ -1,0 +1,28 @@
+{
+  "source": [
+    {
+      "name": "fact",
+      "storeType": "GCS",
+      "storeConfig": {
+        "path": "gs://",
+        "format": "csv"
+      }
+    },
+    {
+      "name": "lookup",
+      "storeType": "GCS",
+      "storeConfig": {
+        "path": "gs://",
+        "format": "csv"
+      }
+    }
+  ],
+  "sink": {
+    "storeType": "GCS",
+    "storeConfig": {
+      "path": "gs://",
+      "format": "csv",
+      "mode": "overwrite"
+    }
+  }
+}
