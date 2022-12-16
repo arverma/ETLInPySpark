@@ -2,25 +2,25 @@
   "source": [
     {
       "name": "fact",
-      "storeType": "GCS",
+      "storeType": "object_store",
       "storeConfig": {
-        "path": "gs://arverma/orders_data.csv",
+        "path": "tests/resources/input/orders_data.csv",
         "format": "csv"
       }
     },
     {
       "name": "lookup",
-      "storeType": "GCS",
+      "storeType": "object_store",
       "storeConfig": {
-        "path": "gs://arverma/citytier_pincode.csv",
+        "path": "tests/resources/input/citytier_pincode.csv",
         "format": "csv"
       }
     }
   ],
   "sink": {
-    "storeType": "GCS",
+    "storeType": "object_store",
     "storeConfig": {
-      "path": "gs://arverma/{env}",
+      "path": "sink/{env}",
       "format": "csv",
       "mode": "overwrite"
     }

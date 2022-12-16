@@ -20,7 +20,7 @@ def extract_source_data(spark, sources):
 
 
 def read_source_data(spark, source_type, source_config):
-    if source_type == "GCS" and source_config["format"].lower() == "csv":
+    if source_type == "object_store" and source_config["format"].lower() == "csv":
         return spark.read.csv(source_config["path"], header=True, inferSchema=True)
 
 
@@ -33,7 +33,7 @@ def save_to_sink(df, config, env="prod"):
     :return:
     """
     sink_conf = config["storeConfig"]
-    if config["storeType"] == "GCS":
+    if config["storeType"] == "object_store":
         df.write.format(sink_conf["format"]).mode(sink_conf["mode"]).save(
             sink_conf["path"].format(env=env)
         )
