@@ -1,7 +1,7 @@
 remove_unwanted_files:
-	rm -r build
-	rm -r dist
-	rm -r etlinpyspark.egg-info
+	rm -rf build
+	rm -rf dist
+	rm -rf etlinpyspark.egg-info
 
 build: remove_unwanted_files
 	rm -rf dist
