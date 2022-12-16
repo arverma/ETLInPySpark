@@ -1,4 +1,4 @@
-__author__ = 'aman.rv'
+__author__ = "aman.rv"
 
 import argparse
 import simplejson
@@ -13,36 +13,37 @@ def extract_source_data(spark, sources):
     """
     df_dict = {}
     for source in sources:
-        df_dict[source["name"]] = read_source_data(spark, source["storeType"], source["storeConfig"])
+        df_dict[source["name"]] = read_source_data(
+            spark, source["storeType"], source["storeConfig"]
+        )
     return df_dict
 
 
 def read_source_data(spark, source_type, source_config):
-    if source_type == "GCS":
-        return spark.read.option("format", source_config["format"]).load(source_config["path"], header=True)
+    if source_type == "GCS" and source_config["format"].lower() == "csv":
+        return spark.read.csv(source_config["path"], header=True, inferSchema=True)
 
 
-def save_to_sink(df, config):
+def save_to_sink(df, config, env="prod"):
     """
 
-    :param spark:
+    :param env:
     :param df:
     :param config:
     :return:
     """
     sink_conf = config["storeConfig"]
     if config["storeType"] == "GCS":
-        df.write.option("mode", sink_conf["mode"]).option("format", sink_conf["format"]).save(
-            sink_conf["path"]
+        df.write.format(sink_conf["format"]).mode(sink_conf["mode"]).save(
+            sink_conf["path"].format(env=env)
         )
 
 
-def read_job_config():
+def read_job_config(args):
     """
 
     :return:
     """
-    args = parse_known_cmd_args()
     with open(args.config_file_name) as config_file:
         try:
             return simplejson.load(config_file)
@@ -62,4 +63,5 @@ def parse_known_cmd_args():
     parser.add_argument(
         "--config_file_name", help="specify config file name", action="store"
     )
+    parser.add_argument("--env", help="env, dev, pre-prod, prod", action="store")
     return parser.parse_known_args()[0]

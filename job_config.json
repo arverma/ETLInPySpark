@@ -4,7 +4,7 @@
       "name": "fact",
       "storeType": "GCS",
       "storeConfig": {
-        "path": "gs://",
+        "path": "gs://arverma/orders_data.csv",
         "format": "csv"
       }
     },
@@ -12,7 +12,7 @@
       "name": "lookup",
       "storeType": "GCS",
       "storeConfig": {
-        "path": "gs://",
+        "path": "gs://arverma/citytier_pincode.csv",
         "format": "csv"
       }
     }
@@ -20,7 +20,7 @@
   "sink": {
     "storeType": "GCS",
     "storeConfig": {
-      "path": "gs://",
+      "path": "gs://arverma/{env}",
       "format": "csv",
       "mode": "overwrite"
     }
