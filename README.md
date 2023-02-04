@@ -16,8 +16,10 @@
     |   `-- input
     |       |-- citytier_pincode.csv
     |       `-- orders_data.csv
-    |-- test_transform.py
-    `-- test_utils.py
+    `-- test_src
+        |-- test_transform.py
+        `-- test_utils.py
+
 |-- Makefile # used to build egg file
 |-- setup.py # used to build egg file
 |-- README.md

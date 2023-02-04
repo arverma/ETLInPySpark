@@ -13,7 +13,7 @@ if __name__ == "__main__":
     # Initialise Spark Session
     spark = SparkSession.builder.appName("ETLInPySpark").getOrCreate()
     args = parse_known_cmd_args()
-    config = read_job_config(args)
+    config = read_job_config(args.config_file_name)
 
     # Extract
     df_dict = extract_source_data(spark, config["source"])
